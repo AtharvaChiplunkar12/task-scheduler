@@ -1,12 +1,14 @@
 package models
 
 import (
+	"time"
+
 	"github.com/jackc/pgtype"
 )
 
 type UserRequest struct {
 	Task string `json:"task"`
-	ScheduledAt string `json:"scheduled_at"`
+	ScheduledAt time.Time `json:"scheduled_at"`
 }
 
 type Task struct {

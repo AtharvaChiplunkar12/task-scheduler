@@ -11,10 +11,18 @@ import (
 )
 
 func ProcessRequest(c *gin.Context, db *sql.DB) {
-	var request models.UserRequest
-	if err := c.ShouldBindJSON(&request); err != nil {
+	var request_dto models.UserRequest_DTO
+
+	if err := c.ShouldBindJSON(&request_dto); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Invalid Input": err.Error(),
+		})
+		return
+	}
+	request, err := convertDTO(request_dto)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"Time format Error": err.Error(),
 		})
 		return
 	}

@@ -1,0 +1,15 @@
+FROM postgres:16.1
+
+# Set environment variables for PostgreSQL
+ENV POSTGRES_USER=myuser
+ENV POSTGRES_PASSWORD=mypassword
+ENV POSTGRES_DB=mydatabase
+
+# Install pgcrypto extension
+RUN apt-get update && apt-get install -y postgresql-contrib
+
+# Expose the default PostgreSQL port
+EXPOSE 5432
+
+# Command to run PostgreSQL
+CMD ["postgres"]
